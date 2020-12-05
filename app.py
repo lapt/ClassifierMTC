@@ -7,7 +7,7 @@ import numpy as np
 APP = Flask(__name__)
 API = Api(APP)
 
-IRIS_MODEL = joblib.load('results_models_test/LinerSVC.joblib')
+IRIS_MODEL = joblib.load('results_models_test/SVC.joblib')
 
 
 class Predict(Resource):
@@ -20,7 +20,8 @@ class Predict(Resource):
 
         X_new = np.fromiter(args.values(), dtype='S128')  # convert input to array
 
-        out = {'Prediction': int(IRIS_MODEL.predict([X_new[0]])[0])}
+        out = {'High_priority': int(IRIS_MODEL.predict([X_new[0]])[0]),
+               'High_priority_prob': IRIS_MODEL.predict_proba([X_new[0]])[0][1]}
 
         return out, 200
 

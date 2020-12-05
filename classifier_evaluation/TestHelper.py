@@ -44,22 +44,22 @@ def evaluation(path_corpus_train, path_corpus_test):
     subject_corpus_test = create_subject_corpus(path_corpus_test)
     msg_test = subject_corpus_test['subject']
     label_test = subject_corpus_test['priority']
-    print("RandonForest")
-    model = RandomForestClassifier(criterion='gini', max_features='log2', n_estimators=150)
-    model_predict = test_model(model, msg_train, label_train, msg_test, label_test, (1, 1), False)
-    joblib.dump(model_predict, "results_models_test/RandonForest.joblib")
-
-    print("LinerSVC")
-    model = svm.LinearSVC(C=2, loss='squared_hinge')
-    model_predict = test_model(model, msg_train, label_train, msg_test, label_test, (1, 2), True)
-    joblib.dump(model_predict, "results_models_test/LinerSVC.joblib")
-
-    print("MultinomialNB")
-    model = MultinomialNB(alpha=0.01)
-    model_predict = test_model(model, msg_train, label_train, msg_test, label_test, (1, 2), False)
-    joblib.dump(model_predict, "results_models_test/MultinomialNB.joblib")
+    # print("RandonForest")
+    # model = RandomForestClassifier(criterion='gini', max_features='log2', n_estimators=150)
+    # model_predict = test_model(model, msg_train, label_train, msg_test, label_test, (1, 1), False)
+    # joblib.dump(model_predict, "results_models_test/RandonForest.joblib")
+    #
+    # print("LinerSVC")
+    # model = svm.LinearSVC(C=2, loss='squared_hinge')
+    # model_predict = test_model(model, msg_train, label_train, msg_test, label_test, (1, 2), True)
+    # joblib.dump(model_predict, "results_models_test/LinerSVC.joblib")
+    #
+    # print("MultinomialNB")
+    # model = MultinomialNB(alpha=0.01)
+    # model_predict = test_model(model, msg_train, label_train, msg_test, label_test, (1, 2), False)
+    # joblib.dump(model_predict, "results_models_test/MultinomialNB.joblib")
 
     print("SVC")
-    model = svm.SVC(C=100, kernel='rbf')
+    model = svm.SVC(C=100, kernel='rbf', probability=True)
     model_predict = test_model(model, msg_train, label_train, msg_test, label_test, (1, 2), False)
     joblib.dump(model_predict, "results_models_test/SVC.joblib")
