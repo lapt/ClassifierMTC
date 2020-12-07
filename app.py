@@ -16,6 +16,7 @@ class Predict(Resource):
     def post():
         parser = reqparse.RequestParser()
         parser.add_argument('asunto')
+        parser.add_argument('institucion')
         args = parser.parse_args()  # creates dict
 
         X_new = np.fromiter(args.values(), dtype='S128')  # convert input to array
